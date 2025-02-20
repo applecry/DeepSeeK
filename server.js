@@ -4,7 +4,7 @@ const axios = require('axios');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // 配置CORS和JSON解析中间件
 app.use(cors());
@@ -14,8 +14,14 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // DeepSeek R1 API配置
-const API_KEY = '2589b355-fa6e-4cbc-9503-e7aae48cad87';
+const API_KEY = process.env.API_KEY;
 const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
+
+// 检查API密钥是否配置
+if (!API_KEY) {
+    console.error('错误：未设置API_KEY环境变量');
+    process.exit(1);
+}
 
 // 处理聊天请求的路由
 app.post('/api/chat', async (req, res) => {
