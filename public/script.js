@@ -249,3 +249,46 @@ function startNewChat() {
 
 // 绑定新对话按钮点击事件
 newChatButton.addEventListener('click', startNewChat);
+
+// 表情按钮和面板
+const emojiButton = document.createElement('button');
+emojiButton.className = 'emoji-button';
+emojiButton.textContent = '😊';
+const emojiPanel = document.createElement('div');
+emojiPanel.className = 'emoji-panel';
+
+// 常用表情列表
+const emojis = ['😊', '😂', '🤣', '😍', '🥰', '😘', '😎', '🤔', '😅', '😉', '😇', '🙃', '😋', '🤗', '🤭', '😌', '😏', '🥳', '🤩', '😊'];
+
+// 创建表情面板内容
+emojis.forEach(emoji => {
+    const emojiItem = document.createElement('div');
+    emojiItem.className = 'emoji-item';
+    emojiItem.textContent = emoji;
+    emojiItem.onclick = () => {
+        const cursorPos = userInput.selectionStart;
+        const textBefore = userInput.value.substring(0, cursorPos);
+        const textAfter = userInput.value.substring(cursorPos);
+        userInput.value = textBefore + emoji + textAfter;
+        userInput.focus();
+        emojiPanel.classList.remove('show');
+    };
+    emojiPanel.appendChild(emojiItem);
+});
+
+// 添加表情按钮和面板到输入容器
+const inputContainer = document.querySelector('.input-container');
+inputContainer.insertBefore(emojiButton, userInput);
+inputContainer.appendChild(emojiPanel);
+
+// 表情按钮点击事件
+emojiButton.onclick = () => {
+    emojiPanel.classList.toggle('show');
+};
+
+// 点击其他地方关闭表情面板
+document.addEventListener('click', (e) => {
+    if (!emojiButton.contains(e.target) && !emojiPanel.contains(e.target)) {
+        emojiPanel.classList.remove('show');
+    }
+});
