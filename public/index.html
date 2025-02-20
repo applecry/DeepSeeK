@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek R1 AI 对话</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题区域 -->
+        <header class="header">
+            <h1>DeepSeek R1 AI 对话</h1>
+            <div class="header-buttons">
+                <button id="newChatButton" class="new-chat-button">新对话</button>
+                <button id="exportButton" class="export-button">导出对话</button>
+            </div>
+        </header>
+        <div class="topic-input">
+            <input type="text" id="topicInput" placeholder="输入对话主题..." />
+            <span class="chat-topic" id="currentTopic"></span>
+        </div>
+
+        <!-- 对话区域 -->
+        <main class="chat-container">
+            <!-- 消息历史记录 -->
+            <div class="messages" id="messages"></div>
+
+            <!-- 输入区域 -->
+            <div class="input-container">
+                <textarea
+                    id="userInput"
+                    placeholder="请输入您的问题..."
+                    rows="3"
+                ></textarea>
+                <button id="sendButton">发送</button>
+            </div>
+        </main>
+
+        <!-- 历史对话记录面板 -->
+        <div class="history-panel">
+            <div class="history-header" id="historyHeader">
+                <h2>历史对话记录</h2>
+                <span id="historyToggle">▼</span>
+            </div>
+            <div class="history-content" id="historyContent"></div>
+        </div>
+    </div>
+
+    <!-- 引入交互脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
